@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\CreateAccountRequest;
 use App\Http\Requests\Account\SignInRequest;
+use App\Http\Resources\Account\UserResource;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -19,6 +21,13 @@ class AccountController extends Controller
         return [
             'token' => $request->signIn()
         ];
+    }
+
+    public function show()
+    {
+        return new UserResource(
+            auth()->user()
+        );
     }
 
 
