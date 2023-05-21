@@ -16,13 +16,19 @@ class Project extends Model
         'description',
         'source_language_id',
         'target_languages_ids',
-        'use_machine_translate'
+        'use_machine_translate',
+        'user_id'
     ];
 
     protected $casts = [
         'target_languages_ids' => 'array',
         'use_machine_translate' => 'bool'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function sourceLanguage(): BelongsTo
     {
