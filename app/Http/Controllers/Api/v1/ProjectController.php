@@ -29,7 +29,6 @@ class ProjectController extends Controller
         //
     }
 
-
     public function update(UpdateProjectRequest $request, Project $project)
     {
         return new ProjectResource(
@@ -38,9 +37,9 @@ class ProjectController extends Controller
         );
     }
 
-
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return responseOk();
     }
 }
