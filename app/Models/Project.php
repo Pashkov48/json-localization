@@ -38,7 +38,7 @@ class Project extends Model
     public function targetLanguages(): Collection
     {
         return Language::query()
-            ->whereIn('id', $this->target_language_ids)
+            ->whereIn('id', $this->target_languages_ids)
             ->get();
     }
 }
