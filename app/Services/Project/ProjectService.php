@@ -30,10 +30,6 @@ class ProjectService
         return $this->project;
     }
 
-    /**
-     * @param Project $project
-     * @return ProjectService
-     */
     public function setProject(Project $project): ProjectService
     {
         $this->project = $project;

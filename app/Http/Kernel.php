@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Document\AddDocumentMiddleware;
+use App\Http\Middleware\Document\DocumentAccessMiddleware;
+use App\Http\Middleware\Document\GetDocumentMiddleware;
+use App\Http\Middleware\Project\ProjectAccessMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -40,7 +44,7 @@ class Kernel extends HttpKernel
 
         'api' => [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
@@ -63,5 +67,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'document.add.access' => AddDocumentMiddleware::class,
+        'document.list.access' => GetDocumentMiddleware::class,
+        'document.access' => DocumentAccessMiddleware::class,
+        'project.access' => ProjectAccessMiddleware::class,
     ];
 }

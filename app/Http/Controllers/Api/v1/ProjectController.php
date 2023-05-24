@@ -12,6 +12,14 @@ use App\Facades\Project as ProjectService;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        //посредник
+        $this->middleware('project.access')->only([
+            'update', 'destroy'
+        ]);
+    }
+
     public function index()
     {
         return MinifiedProjectResource::collection(

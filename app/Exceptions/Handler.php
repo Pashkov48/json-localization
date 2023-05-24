@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Exceptions\Account\InvalidCredentialsException;
+use App\Exceptions\Account\NoAccessToOperationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -30,7 +31,15 @@ class Handler extends ExceptionHandler
                 //функция для мультиязычности(exception это название файла в папке ru)
                 //так же в конфиге app можно указать локализацию locale = ru
                 'message' => __('exceptions.InvalidUserCredentials')
-            ]);
+            ], 401);
+        });
+        $this->renderable(function (NoAccessToOperationException $e) {
+            return response()->json([
+                'status' => 'failed',
+                //функция для мультиязычности(exception это название файла в папке ru)
+                //так же в конфиге app можно указать локализацию locale = ru
+                'message' => __('exceptions.NoAccessToOperationException')
+            ], 403);
         });
 
         $this->reportable(function (Throwable $e) {
